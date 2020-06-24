@@ -1,32 +1,16 @@
 import React, { Component, Fragment } from "react";
 import Contact from "./Contact";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { getContacts } from "../../actions/contactActions";
 
 class Contacts extends Component {
-  state = {
-    contacts: [
-      {
-        id: 1,
-        name: "John Doe",
-        email: "john@mail.com",
-        phone: "111-111-1111",
-      },
-      {
-        id: 2,
-        name: "Karen Williams",
-        email: "karen@mail.com",
-        phone: "222-222-2222",
-      },
-      {
-        id: 3,
-        name: "Henry Johnson",
-        email: "henry@mail.com",
-        phone: "333-333-3333",
-      },
-    ],
-  };
+  componentDidMount() {
+    this.props.getContacts();
+  }
 
   render() {
-    const { contacts } = this.state;
+    const { contacts } = this.props;
     return (
       <Fragment>
         <h1 className="display-4 mb-2">
@@ -40,4 +24,16 @@ class Contacts extends Component {
   }
 }
 
-export default Contacts;
+Contacts.propTypes = {
+  contacts: PropTypes.array.isRequired,
+  getContacts: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  contacts: state.contact.contacts,
+});
+
+/**
+ * connect() needs anything we want to map from redux state to props in component and dispatch
+ */
+export default connect(mapStateToProps, { getContacts })(Contacts);

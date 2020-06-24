@@ -8,28 +8,32 @@ import AddContact from "./components/contacts/AddContact";
 import EditContact from "./components/contacts/EditContact";
 import NotFound from "./components/pages/NotFound";
 import Test from "./components/test/Test";
+import { Provider } from "react-redux";
+import store from "./store";
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Header branding="Contact Manager"></Header>
-        <div className="container">
-          <Switch>
-            <Route exact path="/" component={Contacts}></Route>
-            <Route exact path="/contact/add" component={AddContact}></Route>
-            <Route
-              exact
-              path="/contact/edit/:id"
-              component={EditContact}
-            ></Route>
-            <Route exact path="/about/:id" component={About}></Route>
-            <Route exact path="/test" component={Test}></Route>
-            <Route component={NotFound}></Route>
-          </Switch>
+    <Provider store={store}>
+      <Router>
+        <div className="App">
+          <Header branding="Contact Manager"></Header>
+          <div className="container">
+            <Switch>
+              <Route exact path="/" component={Contacts}></Route>
+              <Route exact path="/contact/add" component={AddContact}></Route>
+              <Route
+                exact
+                path="/contact/edit/:id"
+                component={EditContact}
+              ></Route>
+              <Route exact path="/about/:id" component={About}></Route>
+              <Route exact path="/test" component={Test}></Route>
+              <Route component={NotFound}></Route>
+            </Switch>
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </Provider>
   );
 }
 
