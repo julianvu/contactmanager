@@ -6,6 +6,7 @@ import About from "./components/pages/About";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from "./context";
 import AddContact from "./components/contacts/AddContact";
+import NotFound from "./components/pages/NotFound";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
               <Route exact path="/" component={Contacts}></Route>
               <Route exact path="/contact/add" component={AddContact}></Route>
               <Route exact path="/about/:id" component={About}></Route>
+              <Route component={NotFound}></Route>
             </Switch>
           </div>
         </div>
